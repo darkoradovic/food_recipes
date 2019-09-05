@@ -1,14 +1,39 @@
 import React, { Component } from "react";
+import {Link, withRouter} from 'react-router-dom'
 
-export default class Header extends Component {
+ class Header extends Component {
   state = {
-    showForm: false
+    showForm: false,
+    value: ''
   };
+
+  timeout = null;
 
   handleForm = () => {
     console.log("Hello");
     this.setState({ showForm: !this.state.showForm });
   };
+
+  
+
+  handleSearch = (e) => {
+    this.setState({value: e.target.value})
+    console.log(this.state)
+    clearTimeout(this.timeout)
+
+    this.timeout = setTimeout(() => {
+      this.props.callback(this.state.value)
+    }, 500)
+
+  }
+
+  handleKey = (e) => {
+    if(e.key === 'Enter'){
+      console.log('enter')
+      this.props.history.push('/search')
+      
+    }
+  }
 
   render() {
     return (
@@ -19,11 +44,14 @@ export default class Header extends Component {
               type="text"
               placeholder="Search recipes..."
               className="search-box"
+              onChange={this.handleSearch}
+              onKeyDown={this.handleKey}
+              value={this.state.value}
             />
-            <i
+            <Link to="/search"><i
               className="fas fa-search"
               style={{ paddingLeft: "10px", height: "20px" }}
-            ></i>
+            ></i></Link>
           </div>
 
           <div className="col">
@@ -73,3 +101,5 @@ export default class Header extends Component {
     );
   }
 }
+
+export default withRouter(Header)

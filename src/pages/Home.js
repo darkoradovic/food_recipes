@@ -5,7 +5,6 @@ import About from "../components/About";
 import Contact from "../components/Contact";
 import axios from "axios";
 
-import { recipes } from "../tempList";
 
 export default class Home extends Component {
   state = {
@@ -23,6 +22,8 @@ export default class Home extends Component {
         console.log(this.state.recipes);
       });
   }
+
+
 
   render() {
     return (
