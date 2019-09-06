@@ -45,26 +45,29 @@ export default class Home extends Component {
               </button>
             </Link>
           </div>
-          <div className="col">
+          <div className="col home-col ">
             <img
               src={img}
               alt="..."
-              style={{ width: "500px", height: "600px" }}
+              
+              className=" home-img"
             />
           </div>
         </div>
-        <div className="row">
+        <div className="row mt-5 mb-5">
           {this.state.recipes.map(recipe => {
             return (
-              <div className="row" key={recipe.idCategory}>
-                <div className="col-10 mx-auto col-md-6 col-lg-4 my-3">
+              <div className="col" key={recipe.idCategory}>
+                <div className="col">
                   <Link to={`category/${recipe.strCategory}`}>
                     <img
                       src={recipe.strCategoryThumb}
                       alt="..."
                       style={{ width: "250px" }}
+                      className="rounded mx-auto d-block"
                     />
                   </Link>
+                  <p className="text-center"><b>{recipe.strCategory}</b></p>
                 </div>
               </div>
             );

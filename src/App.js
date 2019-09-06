@@ -13,7 +13,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 
 export default class App extends Component {
-  state = {
+  /* state = {
     recipes: [],
     searchTerm: ""
   };
@@ -37,10 +37,10 @@ export default class App extends Component {
     fetch(endpoint)
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        console.log(res.meals) 
         this.setState(
           {
-            recipes: [...this.state.recipes, ...res.meals]
+            recipes: res.meals
           },
           () => {
             if (this.state.searchTerm !== "") {
@@ -49,14 +49,17 @@ export default class App extends Component {
           }
         );
        
-      });
-  };
+      }); 
+
+  }; */
+
+  
   
   render() {
     
     return (
       <div>
-        <Header callback={this.searchItems} />
+        <Header />
 
         <Switch>
           <Route exact path="/" component={Home} />

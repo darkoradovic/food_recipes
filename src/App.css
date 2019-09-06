@@ -32,7 +32,7 @@ a, a:visited, a:active {
 
 .search-box {
   width: 200px;
-  margin-top: 25px;
+  margin-top: 34px;
   border-radius: 5px;
   border: 1px solid gray;
   position: relative;
@@ -68,6 +68,64 @@ a, a:visited, a:active {
   margin-top: 100px;
 }
 
+.home-img {
+  width: 600px;
+}
+
+.about-img {
+  width: 600px;
+  margin-top: 130px;
+}
+
+@media only screen and (max-width: 769px) {
+  .home-img {
+    width: 500px;
+  }
+
+}
+
+@media only screen and (max-width: 553px) {
+  .home-img {
+    width: 400px;
+  }
+  
+}
+
+@media only screen and (max-width: 300px) {
+  .home-img {
+    width: 200px;
+  }
+
+}
+
+@media only screen and (max-width: 992px) {
+  .about-img {
+    margin: 20px auto;
+  }
+
+}
+
+@media only screen and (max-width: 730px) {
+  .about-img {
+    width: 400px;
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+  .about-img {
+    width: 200px;
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+  .logo-footer {
+    width: 200px;
+  }
+
+}
+
 .line {
   border-bottom: 3px solid black;
   width: 170px;
@@ -100,7 +158,7 @@ a, a:visited, a:active {
   background:lightgray;
   position: absolute;
   top: 60px;
-  left: 285px;
+  right: 30%;
   width:200px;
   border-radius:6px;
   margin: 0 auto 0 auto;

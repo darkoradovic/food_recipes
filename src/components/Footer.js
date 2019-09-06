@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer">
         <div className="row">
           <div className="col">
-            <img src={logo} alt="..." />
+            <img src={logo} alt="..." className="logo-footer" />
           </div>
           <div className="col">
             <a href="https://sr-rs.facebook.com/" target="_blank" rel="noopener noreferrer">

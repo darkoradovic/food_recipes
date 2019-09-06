@@ -4,7 +4,78 @@ import {Link, withRouter} from 'react-router-dom'
  class Header extends Component {
   state = {
     showForm: false,
-    value: ''
+    value: '',
+    recipes: [],
+    searchTerm: "",
+    userEmail: '',
+    password: '',
+    loged: false
+  };
+
+
+  handleChange = (e) => {
+        
+    this.setState({
+        [e.target.id]: e.target.value
+    })
+}
+
+handleFormSubmit = (e) => {
+  e.preventDefault();
+   const {userEmail, password} = this.state
+  localStorage.setItem('userEmail', userEmail)
+  localStorage.setItem('password', password)
+   
+
+  e.target.reset()
+  console.log(this.state)
+  this.setState({
+    showForm: false,
+    loged: true
+  })
+}
+
+logout = () => {
+
+  localStorage.setItem('userEmail', '')
+  localStorage.setItem('password', '')
+  this.props.history.push('/');
+  this.setState({ loged: false })
+
+}
+
+  searchItems = searchTerm => {
+    console.log(searchTerm);
+    let endpoint = "";
+    this.setState({
+      recipes: [],
+      searchTerm: searchTerm
+    });
+    if (searchTerm === "") {
+      endpoint = ''
+    } else {
+      endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${this.state.searchTerm}`;
+    }
+    this.fetchItems(endpoint);
+  };
+
+  fetchItems = endpoint => {
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res.meals) 
+        this.setState(
+          {
+            recipes: res.meals
+          },
+          () => {
+            if (this.state.searchTerm !== "") {
+              localStorage.setItem("recipe", JSON.stringify(this.state.recipes));
+            }
+          }
+        );
+       
+      }); 
   };
 
   timeout = null;
@@ -22,8 +93,9 @@ import {Link, withRouter} from 'react-router-dom'
     clearTimeout(this.timeout)
 
     this.timeout = setTimeout(() => {
-      this.props.callback(this.state.value)
+      this.searchItems(this.state.value)
     }, 500)
+
 
   }
 
@@ -32,10 +104,14 @@ import {Link, withRouter} from 'react-router-dom'
       console.log('enter')
       this.props.history.push('/search')
       
+      this.setState({
+        value: ''
+      })
     }
   }
 
   render() {
+    
     return (
       <nav>
         <div className="row">
@@ -55,13 +131,18 @@ import {Link, withRouter} from 'react-router-dom'
           </div>
 
           <div className="col">
-            <ul className="nav-items">
+            <div>
+              {!this.state.loged ? 
+              
+              <ul className="nav-items">
+              
               <li>
                 <a href="#contact">Contact</a>
               </li>
               <li>
                 <a href="#about">About Us</a>
               </li>
+              
               <li>
                 <a>
                   <i
@@ -71,27 +152,53 @@ import {Link, withRouter} from 'react-router-dom'
                   ></i>
                 </a>
               </li>
-            </ul>
+              
+              
+            </ul>  : 
+              <ul className="nav-items">
+              
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+              <li>
+                <a href="#about">About Us</a>
+              </li>
+              
+              
+              <li>
+                <Link to="my-meals">My meals</Link>
+              </li>
+              <li>
+                <a onClick={this.logout}>Logout</a>
+              </li>
+            </ul>} 
+            </div>
+            
+            
             {this.state.showForm ? (
-              <form method="post" action="index.html">
+              <form onSubmit={this.handleFormSubmit}>
                 <div className="box">
                   <input
                     type="text"
                     name="email"
-                    value="Email"
+                    placeholder="Email"
                     className="email"
+                    id="userEmail"
+                    onChange={this.handleChange}
                   />
 
                   <input
-                    type="password"
-                    name="email"
-                    value="Password"
+                    type="text"
+                    name="password"
+                    placeholder="password"
                     className="email"
+                    id="password"
+                    onChange={this.handleChange}
                   />
 
-                  <a href="#">
-                    <div className="btn-form-icon">Log In</div>
-                  </a>
+                  
+                     <button className="btn-form-icon">Log in</button>
+                  
                 </div>
               </form>
             ) : null}
@@ -99,7 +206,9 @@ import {Link, withRouter} from 'react-router-dom'
         </div>
       </nav>
     );
+    
   }
+  
 }
 
 export default withRouter(Header)

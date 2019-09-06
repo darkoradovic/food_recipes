@@ -47,6 +47,7 @@ export default class SingleMeal extends Component {
                   src={recipe.strMealThumb}
                   alt="..."
                   className="category-reco"
+                  
                 />
                 
               </div>
@@ -92,10 +93,9 @@ export default class SingleMeal extends Component {
                     {this.state.similar.map(recipe => {
                         return (
                             <div className="row" key={recipe.idMeal}>
-                            <div className="col-6 col-md-4 " >
-                                <img src={recipe.strMealThumb} alt="..." style={{width:'300px', height:'300px'}} />
-                                <img src={recipe.strMealThumb} alt="..." style={{width:'300px', height:'300px'}} />
-                                <img src={recipe.strMealThumb} alt="..." style={{width:'300px', height:'300px'}} />
+                            <div  >
+                                <img src={recipe.strMealThumb} alt="..." style={{width:'300px', height:'300px'}} className="rounded mx-auto d-block"/>
+                                
                             </div>
                             </div>
                         )
