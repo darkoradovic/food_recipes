@@ -103,7 +103,8 @@ export default class Search extends Component {
                 <img
                   src={recipe.strMealThumb}
                   alt="..."
-                  className="category-reco"
+                  className="category-reco rounded"
+                 
                 />
 
                 <h4 className="mt-3">{recipe.strMeal}</h4>

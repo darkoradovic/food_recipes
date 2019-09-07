@@ -124,7 +124,7 @@ export default class Category extends Component {
                   type="text"
                   placeholder="Search meals..."
                   className="search-box"
-                  style={{ float: "right" }}
+                  style={{ float: "right", marginTop:'60px' }}
                   onChange={this.doSearch}
                   value={this.state.value}
                 />

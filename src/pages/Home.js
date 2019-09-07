@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import {HashLink} from 'react-router-hash-link'
 import img from "../Assets/Images/HEADER IMAGE.png";
 import About from "../components/About";
 import Contact from "../components/Contact";
@@ -21,12 +22,14 @@ export default class Home extends Component {
         this.setState({ recipes: data.categories });
         console.log(this.state.recipes);
       });
+    
+      
   }
 
-
-
   render() {
+    
     return (
+      
       <div className="container">
         <div className="row home">
           <div className="col home-text">
@@ -39,11 +42,11 @@ export default class Home extends Component {
               reprehenderit in voluptate velit esse cillum dolore eu fugiat
               nulla pariatur.
             </p>
-            <Link to="/category">
+            <HashLink to="/#category">
               <button className="btn-home">
                 Category <i className="fas fa-chevron-down"></i>
               </button>
-            </Link>
+            </HashLink>
           </div>
           <div className="col home-col ">
             <img
@@ -54,7 +57,7 @@ export default class Home extends Component {
             />
           </div>
         </div>
-        <div className="row mt-5 mb-5">
+        <div className="row" id="category" style={{marginTop: '100px', marginBottom: '80px'}}>
           {this.state.recipes.map(recipe => {
             return (
               <div className="col" key={recipe.idCategory}>

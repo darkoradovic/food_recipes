@@ -5,10 +5,18 @@ body{
 
 nav {
   height: 80px;
+  width: 100%;
+}
+
+.navigation {
+  width: 600px;
+  float: right;
+  height: 80px;
 }
 
 .nav-items {
   text-align: right;
+  
 }
 
 .nav-items li {
@@ -32,11 +40,23 @@ a, a:visited, a:active {
 
 .search-box {
   width: 200px;
-  margin-top: 34px;
+  margin-top: 26px;
+  margin-left: 50px;
   border-radius: 5px;
   border: 1px solid gray;
   position: relative;
   padding-left: 5px;
+  z-index: 10000;
+}
+
+#filtersubmit {
+  position: relative;
+  z-index: 1;
+  left: -25px;
+  top: 1px;
+  color: #7B7B7B;
+  cursor:pointer;
+  width: 0;
 }
 
 .btn-home {
@@ -77,6 +97,29 @@ a, a:visited, a:active {
   margin-top: 130px;
 }
 
+@media only screen and (max-width: 992px) {
+  .about-img {
+    margin: 20px auto;
+  }
+}
+  @media only screen and (max-width: 907px) {
+    .navigation{
+      float: left;
+      text-align: center;
+      width: 100%;
+    }
+    .nav-items{
+      
+      float: left;
+    }
+
+    .box{
+      left: 10px;
+      margin-bottom: 50px;
+    }
+
+}
+
 @media only screen and (max-width: 769px) {
   .home-img {
     width: 500px;
@@ -91,20 +134,6 @@ a, a:visited, a:active {
   
 }
 
-@media only screen and (max-width: 300px) {
-  .home-img {
-    width: 200px;
-  }
-
-}
-
-@media only screen and (max-width: 992px) {
-  .about-img {
-    margin: 20px auto;
-  }
-
-}
-
 @media only screen and (max-width: 730px) {
   .about-img {
     width: 400px;
@@ -112,18 +141,48 @@ a, a:visited, a:active {
 
 }
 
-@media only screen and (max-width: 300px) {
-  .about-img {
-    width: 200px;
+@media only screen and (max-width: 480px) {
+  .nav-items{
+    text-align: center;
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  
+  .nav-items li{
+    width: 100%;
+    line-height: 30px;
   }
 
 }
 
 @media only screen and (max-width: 300px) {
-  .logo-footer {
+  .home-img {
     width: 200px;
   }
 
+  .about-img {
+    width: 200px;
+  }
+  .logo-footer {
+    width: 100px;
+  }
+  .category-reco {
+    width: 200px;
+    height: 200px;
+  }
+
+  .search-box {
+    margin-left: 60px;
+    width: 100px;
+  }
+
+
+  
+}
+
+@media only screen and (max-width: 200px) {
+  
 }
 
 .line {
@@ -140,13 +199,12 @@ a, a:visited, a:active {
 
 .footer {
   height: 200px;
-  line-height: 200px;
 }
 
 .social {
   width: 50px;
   float: right;
-  margin-top: 75px;
+  padding-top: 35px;
 }
 
 .social:nth-child(1){
@@ -158,7 +216,7 @@ a, a:visited, a:active {
   background:lightgray;
   position: absolute;
   top: 60px;
-  right: 30%;
+  right: 0;
   width:200px;
   border-radius:6px;
   margin: 0 auto 0 auto;
@@ -172,7 +230,7 @@ a, a:visited, a:active {
   display: block;
   position: absolute;
   top: -5px;
-  right: 12px;
+  right: 31px;
   width: 10px;
   height: 10px;
   background: lightgray;

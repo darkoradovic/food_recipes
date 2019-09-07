@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import {Link, withRouter} from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
- class Header extends Component {
+class Header extends Component {
   state = {
     showForm: false,
     value: '',
@@ -9,40 +10,58 @@ import {Link, withRouter} from 'react-router-dom'
     searchTerm: "",
     userEmail: '',
     password: '',
-    loged: false
+    loged: false,
+    uid: null,
+    isActive: false,
+    token: null
   };
 
+  getToken = () => {
+    const token = localStorage.getItem('token')
+
+    this.setState({ token: token })
+
+  }
 
   handleChange = (e) => {
-        
+
     this.setState({
-        [e.target.id]: e.target.value
+      [e.target.id]: e.target.value
     })
-}
+  }
 
-handleFormSubmit = (e) => {
-  e.preventDefault();
-   const {userEmail, password} = this.state
-  localStorage.setItem('userEmail', userEmail)
-  localStorage.setItem('password', password)
-   
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    const uuid = require('uuid/v4')
+    const { userEmail, password } = this.state
+    localStorage.setItem('userEmail', userEmail)
+    localStorage.setItem('password', password)
+    localStorage.setItem('token', uuid())
 
-  e.target.reset()
-  console.log(this.state)
-  this.setState({
-    showForm: false,
-    loged: true
-  })
-}
 
-logout = () => {
+    e.target.reset()
+    console.log(this.state)
+    this.setState({
+      showForm: false,
+      loged: true,
+      uid: uuid(),
+      isActive: true
+    })
 
-  localStorage.setItem('userEmail', '')
-  localStorage.setItem('password', '')
-  this.props.history.push('/');
-  this.setState({ loged: false })
+    this.getToken()
+  }
 
-}
+
+  logout = () => {
+
+    localStorage.setItem('userEmail', '')
+    localStorage.setItem('password', '')
+    localStorage.setItem('token', null)
+    /* localStorage.setItem('loged', false) */
+    this.props.history.push('/');
+    this.setState({ loged: false, showForm: false })
+
+  }
 
   searchItems = searchTerm => {
     console.log(searchTerm);
@@ -63,7 +82,7 @@ logout = () => {
     fetch(endpoint)
       .then(res => res.json())
       .then(res => {
-        console.log(res.meals) 
+        console.log(res.meals)
         this.setState(
           {
             recipes: res.meals
@@ -74,8 +93,8 @@ logout = () => {
             }
           }
         );
-       
-      }); 
+
+      });
   };
 
   timeout = null;
@@ -85,10 +104,10 @@ logout = () => {
     this.setState({ showForm: !this.state.showForm });
   };
 
-  
+
 
   handleSearch = (e) => {
-    this.setState({value: e.target.value})
+    this.setState({ value: e.target.value })
     console.log(this.state)
     clearTimeout(this.timeout)
 
@@ -100,85 +119,94 @@ logout = () => {
   }
 
   handleKey = (e) => {
-    if(e.key === 'Enter'){
+    if (e.key === 'Enter') {
       console.log('enter')
       this.props.history.push('/search')
-      
+
       this.setState({
         value: ''
       })
     }
   }
 
+
   render() {
-    
+    console.log(this.props)
+
+
     return (
       <nav>
-        <div className="row">
-          <div className="col">
-            <input
-              type="text"
-              placeholder="Search recipes..."
-              className="search-box"
-              onChange={this.handleSearch}
-              onKeyDown={this.handleKey}
-              value={this.state.value}
-            />
-            <Link to="/search"><i
-              className="fas fa-search"
-              style={{ paddingLeft: "10px", height: "20px" }}
-            ></i></Link>
-          </div>
 
-          <div className="col">
-            <div>
-              {!this.state.loged ? 
-              
-              <ul className="nav-items">
-              
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-              <li>
-                <a href="#about">About Us</a>
-              </li>
-              
+
+
+        <input id="filter" type="text" placeholder="Search recipes..."
+          className="search-box"
+          onChange={this.handleSearch}
+          onKeyDown={this.handleKey}
+          value={this.state.value} />
+        <i id="filtersubmit" className="fa fa-search" ></i>
+
+        <div className="navigation">
+          {!this.state.loged ?
+
+            <ul className="nav-items">
               <li>
                 <a>
                   <i
-                    className="far fa-user-circle"
+                    className="far fa-user-circle user-icon"
                     style={{ height: "20px" }}
                     onClick={() => this.handleForm()}
                   ></i>
                 </a>
               </li>
-              
-              
-            </ul>  : 
-              <ul className="nav-items">
-              
               <li>
-                <a href="#contact">Contact</a>
+                <HashLink to="/#contact">Contact</HashLink>
               </li>
               <li>
-                <a href="#about">About Us</a>
+                <HashLink to="/#about">About Us</HashLink>
               </li>
-              
-              
+
+
+
+
+            </ul> :
+            <ul className="nav-items">
+
+              <li>
+                <a>
+                  <i
+                    className="far fa-user-circle user-icon"
+                    style={{ height: "20px" }}
+                    onClick={() => this.handleForm()}
+                  ></i>
+                </a>
+              </li>
+              <li>
+                <a href="/#contact">Contact</a>
+              </li>
+              <li>
+                <a href="/#about">About Us</a>
+              </li>
+
               <li>
                 <Link to="my-meals">My meals</Link>
               </li>
               <li>
-                <a onClick={this.logout}>Logout</a>
+                <Link to="/">Home</Link>
               </li>
-            </ul>} 
-            </div>
-            
-            
-            {this.state.showForm ? (
-              <form onSubmit={this.handleFormSubmit}>
-                <div className="box">
+
+
+            </ul>}
+        </div>
+
+
+        {this.state.showForm ? (
+          <form onSubmit={this.handleFormSubmit}>
+            <div className="box">
+              {!this.state.loged ?
+                <React.Fragment>
                   <input
+                    required
                     type="text"
                     name="email"
                     placeholder="Email"
@@ -188,6 +216,7 @@ logout = () => {
                   />
 
                   <input
+                    required
                     type="text"
                     name="password"
                     placeholder="password"
@@ -195,20 +224,21 @@ logout = () => {
                     id="password"
                     onChange={this.handleChange}
                   />
+                  <button className="btn-form-icon">Log in</button>
+                </React.Fragment> :
+                <button className="btn-form-icon" onClick={() => this.logout()}>Log out</button>
+              }
 
-                  
-                     <button className="btn-form-icon">Log in</button>
-                  
-                </div>
-              </form>
-            ) : null}
-          </div>
-        </div>
+            </div>
+          </form>
+        ) : null}
+
+
       </nav>
     );
-    
+
   }
-  
+
 }
 
 export default withRouter(Header)

@@ -48,21 +48,21 @@ export default class Contact extends Component {
             
                 <form className="mt-5" onSubmit={this.handleFormSubmit}>
                     <div className="form-group">
-                        <input id="name" onChange={this.handleChange} type="text" name="firstName" className="form-control" placeholder="First name" />
+                        <input required id="name" onChange={this.handleChange} type="text" name="firstName" className="form-control" placeholder="First name" />
                     </div>
 
                     <div className="form-group">
-                        <input id="lastname" onChange={this.handleChange} type="text" name="lastName" className="form-control" placeholder="Last name" />
+                        <input required id="lastname" onChange={this.handleChange} type="text" name="lastName" className="form-control" placeholder="Last name" />
                     </div>
 
                     <div className="form-group">
-                        <input id="email" onChange={this.handleChange} type="email" name="email" className="form-control" placeholder="Email" />
+                        <input required id="email" onChange={this.handleChange} type="email" name="email" className="form-control" placeholder="Email" />
                     </div>
 
                     
 
                     <div className="form-group">
-                        <textarea id="message" onChange={this.handleChange} name="message" className="form-control" rows="10" placeholder="Message"></textarea>
+                        <textarea required id="message" onChange={this.handleChange} name="message" className="form-control" rows="10" placeholder="Message"></textarea>
                     </div>
 
                     <div className="form-group mt-3">

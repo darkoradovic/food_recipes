@@ -9,9 +9,9 @@ const Footer = () => {
       <div className="footer">
         <div className="row">
           <div className="col">
-            <img src={logo} alt="..." className="logo-footer" />
+            <img src={logo} alt="..." className="logo-footer" style={{ width: '250px' }} />
           </div>
-          <div className="col">
+          <div className="col ">
             <a href="https://sr-rs.facebook.com/" target="_blank" rel="noopener noreferrer">
               <img src={fb} alt="..." className="social" />
             </a>
@@ -20,10 +20,11 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        <div className=" footer-copyright text-center py-3">
+          © Copyright-Golux Technologies 2019-Darko Radovic
       </div>
-      <div className="footer-copyright text-center py-3">
-        © Copyright-Golux Technologies 2019-Darko Radovic
       </div>
+
     </React.Fragment>
   );
 };

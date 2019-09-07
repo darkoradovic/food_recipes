@@ -11,53 +11,15 @@ import Search from "./pages/Search";
 import SingleMeal from "./pages/SingleMeal";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Protected from './ProtectedRoute'
+import PageNotFound from "./components/PageNotFound";
 
 export default class App extends Component {
-  /* state = {
-    recipes: [],
-    searchTerm: ""
-  };
 
-  searchItems = searchTerm => {
-    console.log(searchTerm);
-    let endpoint = "";
-    this.setState({
-      recipes: [],
-      searchTerm: searchTerm
-    });
-    if (searchTerm === "") {
-      endpoint = ''
-    } else {
-      endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${this.state.searchTerm}`;
-    }
-    this.fetchItems(endpoint);
-  };
-
-  fetchItems = endpoint => {
-    fetch(endpoint)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res.meals) 
-        this.setState(
-          {
-            recipes: res.meals
-          },
-          () => {
-            if (this.state.searchTerm !== "") {
-              localStorage.setItem("recipe", JSON.stringify(this.state.recipes));
-            }
-          }
-        );
-       
-      }); 
-
-  }; */
-
-  
-  
   render() {
-    
+
     return (
+
       <div>
         <Header />
 
@@ -66,9 +28,10 @@ export default class App extends Component {
           <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/category/:meal" component={Category} />
-          <Route exact path="/my-meals" component={MyMeals} />
+          <Protected exact path="/my-meals" component={MyMeals} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/single-meal/:id" component={SingleMeal} />
+          <Route path="*" component={PageNotFound} />
         </Switch>
 
         <Footer />
