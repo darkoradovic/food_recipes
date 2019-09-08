@@ -20,7 +20,7 @@ export default class Search extends Component {
         this.setState({
           random: data.meals
         });
-        console.log(this.state.random);
+        //console.log(this.state.random);
       });
   }
 
@@ -43,7 +43,7 @@ export default class Search extends Component {
     fetch(endpoint)
       .then(res => res.json())
       .then(res => {
-        console.log(res.meals)
+        //console.log(res.meals)
         this.setState(
           {
             recipes: res.meals
@@ -60,7 +60,7 @@ export default class Search extends Component {
 
   getData = () => {
     var retrievedData = JSON.parse(localStorage.getItem('recipe'))
-    console.log(retrievedData)
+    //console.log(retrievedData)
 
     if (retrievedData === null) {
       console.log('its a null')

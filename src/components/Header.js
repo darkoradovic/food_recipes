@@ -82,7 +82,7 @@ class Header extends Component {
     fetch(endpoint)
       .then(res => res.json())
       .then(res => {
-        console.log(res.meals)
+        //console.log(res.meals)
         this.setState(
           {
             recipes: res.meals

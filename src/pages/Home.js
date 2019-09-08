@@ -20,7 +20,7 @@ export default class Home extends Component {
       .then(res => res.data)
       .then(data => {
         this.setState({ recipes: data.categories });
-        console.log(this.state.recipes);
+        //console.log(this.state.recipes);
       });
     
       

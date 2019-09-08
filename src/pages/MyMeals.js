@@ -20,7 +20,7 @@ export default class MyMeals extends Component {
         this.setState({
           random: data.meals
         });
-        console.log(this.state.random);
+        //console.log(this.state.random);
       });
 
   }

@@ -17,8 +17,8 @@ export default class SingleMeal extends Component {
         this.setState({
           random: data.meals
         });
-        console.log(this.state.random);
-        console.log(this.props.match.params.id)
+        //console.log(this.state.random);
+        //console.log(this.props.match.params.id)
       });
 
       const sim = `https://www.themealdb.com/api/json/v1/1/random.php`
@@ -28,7 +28,7 @@ export default class SingleMeal extends Component {
           this.setState({
               similar: data.meals
           })
-          console.log(this.state.similar.slice(0,3))
+          //console.log(this.state.similar.slice(0,3))
       })
     
       }

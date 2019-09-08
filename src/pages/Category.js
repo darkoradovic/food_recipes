@@ -20,8 +20,8 @@ export default class Category extends Component {
       .then(res => res.data)
       .then(data => {
         this.setState({ recipes: data.meals });
-        console.log(this.state.recipes);
-        console.log(this.props.match.params.meal);
+        //console.log(this.state.recipes);
+        //console.log(this.props.match.params.meal);
       });
 
     const ran = `https://www.themealdb.com/api/json/v1/1/random.php`;
@@ -32,7 +32,7 @@ export default class Category extends Component {
         this.setState({
           random: data.meals
         });
-        console.log(this.state.random);
+        //console.log(this.state.random);
       });
   }
 
@@ -57,7 +57,7 @@ export default class Category extends Component {
     fetch(endpoint)
       .then(res => res.json())
       .then(res => {
-        console.log(res.meals)
+        //console.log(res.meals)
         
         this.setState(
           {
@@ -85,7 +85,7 @@ export default class Category extends Component {
 
   getData = () => {
     var retrievedData = JSON.parse(localStorage.getItem('searchRecipe'))
-    console.log(retrievedData)
+    //console.log(retrievedData)
   
     return (
         <div>
