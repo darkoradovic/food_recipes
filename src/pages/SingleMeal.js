@@ -40,18 +40,18 @@ export default class SingleMeal extends Component {
                 {this.state.random.map(recipe => {
           return (
             <div className="row" key={recipe.idMeal}>
-              <div className="col-4">
+              <div className="col-md-4  info-img">
                 <h1>{recipe.strMeal}</h1>
                 
                 <img
                   src={recipe.strMealThumb}
                   alt="..."
-                  className="category-reco"
+                  className="category-reco rounded mx-auto d-block"
                   
                 />
                 
               </div>
-              <div className="col-8 info-single">
+              <div className="col info-single">
                   <h5 className="single-hash"><b>#{recipe.strIngredient1} #{recipe.strIngredient5}</b></h5>
                   <p><b>Category</b>: {recipe.strCategory}</p>
                   <p><b>County:</b> {recipe.strArea}</p>
@@ -93,8 +93,8 @@ export default class SingleMeal extends Component {
                     {this.state.similar.map(recipe => {
                         return (
                             <div className="row" key={recipe.idMeal}>
-                            <div  >
-                                <img src={recipe.strMealThumb} alt="..." style={{width:'300px', height:'300px'}} className="rounded mx-auto d-block"/>
+                            <div className="col-xl-4" >
+                                <img src={recipe.strMealThumb} alt="..."   className="category-reco rounded mx-auto d-block"/>
                                 
                             </div>
                             </div>

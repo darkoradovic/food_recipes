@@ -136,9 +136,6 @@ class Header extends Component {
 
     return (
       <nav>
-
-
-
         <input id="filter" type="text" placeholder="Search recipes..."
           className="search-box"
           onChange={this.handleSearch}
@@ -147,7 +144,7 @@ class Header extends Component {
         <i id="filtersubmit" className="fa fa-search" ></i>
 
         <div className="navigation">
-          {!this.state.loged ?
+          {!this.state.loged  ?
 
             <ul className="nav-items">
               <li>
